@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>mustache</h1>
+  <div id="root"></div>
+  <script src="/virtual/bundle.js"></script>
+  <script>
+    const templateStr1 = '姓名：{{ name }}，年龄：{{ age }}.=='
+    const templateStr2 = `
+    <div class="zxc">
+      <h3>{{a.b.c}}</h3>
+      <ol>
+        {{#students}}
+          <li>
+            学生{{name}}的爱好是
+            <ol>
+              {{#hobbies}}
+                <li>{{.}}</li>
+              {{/hobbies}}
+            </ol>
+          </li>
+        {{/students}}
+      </ol>
+    </div>
+    `
+    const data1 = { name: 'zs', age: 18 }
+    const data2 = {
+      students: [
+        { name: '张三', hobbies: ['足球', '羽毛球', '乒乓球'] },
+        { name: '李四', hobbies: ['读书', '画画', '书法'] },
+        { name: '王五', hobbies: ['唱歌', '跳舞'] },
+      ],
+      a: {
+        b: {
+          c: 123
+        }
+      }
+    }
+    const str = templateEngine.render(templateStr2, data2)
+    console.log(str)
+    document.getElementById('root').innerHTML = str
+  </script>
+</body>
+
+</html>
